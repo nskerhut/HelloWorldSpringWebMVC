@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
+@WebMvcTest(HelloWorldController.class)
 public class HelloWorldControllerTest {
 
 	
@@ -57,7 +57,9 @@ public class HelloWorldControllerTest {
 		*/
 		when(service.Greet("World")).thenReturn("Hello Mock");
 		
-		this.mockMvc.perform(get("/HelloWorld")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/HelloWorld"))
+		.andDo(print())
+		.andExpect(status().isOk())
 		.andExpect(content().string(containsString("Mock")));
 	}
 
